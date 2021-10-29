@@ -11,15 +11,15 @@ criar_tabelas = '''SET NAMES utf8;
     USE `jogoteca`;
     CREATE TABLE `jogo` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
-      `nome` varchar(50) COLLATE utf8_bin NOT NULL,
+      `nome` varchar(10) COLLATE utf8_bin NOT NULL,
       `categoria` varchar(40) COLLATE utf8_bin NOT NULL,
       `console` varchar(20) NOT NULL,
       PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
     CREATE TABLE `usuario` (
-      `id` varchar(20) COLLATE utf8_bin NOT NULL,
-      `nome` varchar(20) COLLATE utf8_bin NOT NULL,
-      `senha` varchar(20) COLLATE utf8_bin NOT NULL,
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `email` varchar(100) COLLATE utf8_bin NOT NULL,
+      `senha` varchar(50) COLLATE utf8_bin NOT NULL,
       PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;'''
 
@@ -27,7 +27,7 @@ conn.cursor().execute(criar_tabelas)
 
 # inserindo usuarios
 cursor = conn.cursor()
-cursor.execute('''INSERT INTO jogoteca.usuario (id, nome, senha) VALUES ('admin', 'admin', 'admin')''')
+cursor.execute('''INSERT INTO jogoteca.usuario (email, senha) VALUES ('admin', 'admin')''')
 
 
 # commitando senão nada tem efeito

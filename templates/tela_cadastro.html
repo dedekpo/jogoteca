@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadastro Usuário</title>
+    <meta charset="utf-8">
+    <meta name = "author"  content="author">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+
+    <script script type="text/javascript">
+
+            function validaForm() {
+                var expEmail = /[a-z0-9!#$%&'+/=?^`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^`{|}~-]+)@(?:[a-z0-9](?:[a-z0-9-][a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
+
+                var email = document.getElementById('e-mail').value;
+
+
+
+                if(expEmail.test(email)){
+                    return true;
+                }
+
+                else if(expEmail.test(email) != true){
+                    window.alert("E-mail inválido.");
+                    return false;
+                }
+
+            }
+
+    </script>
+</head>
+
+
+<body>
+
+    <div class="registro-usuario">
+        <h2 id="topo">Registrar Usuário</h2>
+    
+        <form name="form" method="POST" action="{{ url_for('cadastrar_user') }}">
+    
+            <p> Nome: <input type="text" class="form-control" name="nome"  id="name" placeholder="Nome de Usuário" required></p>
+            <p> Email: <input type="email" class="form-control" name="email" id="e-mail" placeholder="@.com" required></p>
+            <p> Senha: <input type="password" class="form-control" name="senha" id="senha" required></p>
+            <p><input type="checkbox" name="confirm" id="confirm" required> Concordo com política de uso. </p>
+    
+            <input type="submit" class="btn btn-primary" name="enviar">
+        </form>
+    </div>
+
+</body>
+</html>

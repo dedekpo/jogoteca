@@ -2,10 +2,11 @@ from models import Jogo, Usuario
 
 SQL_DELETA_JOGO = 'delete from jogo where id = %s'
 SQL_JOGO_POR_ID = 'SELECT id, nome, categoria, console from jogo where id = %s'
-SQL_USUARIO_POR_ID = 'SELECT id, nome, senha from usuario where id = %s'
+SQL_USUARIO_POR_ID = 'SELECT id, email, senha from usuario where email = %s'
 SQL_ATUALIZA_JOGO = 'UPDATE jogo SET nome=%s, categoria=%s, console=%s where id = %s'
 SQL_BUSCA_JOGOS = 'SELECT id, nome, categoria, console from jogo'
 SQL_CRIA_JOGO = 'INSERT into jogo (nome, categoria, console) values (%s, %s, %s)'
+SQL_INSERE_USUARIO = 'INSERT into usuario (email, senha) values (%s, %s)'
 
 
 class JogoDao:
@@ -50,6 +51,12 @@ class UsuarioDao:
         dados = cursor.fetchone()
         usuario = traduz_usuario(dados) if dados else None
         return usuario
+    
+    def inserir_usuario(self, email, senha):
+        cursor = self.__db.connection.cursor()
+        cursor.execute(SQL_INSERE_USUARIO, (email, senha))
+        self.__db.connection.commit()
+        return
 
 
 def traduz_jogos(jogos):

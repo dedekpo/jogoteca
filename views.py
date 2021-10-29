@@ -73,14 +73,28 @@ def login():
     proxima = request.args.get('proxima')
     return render_template('login.html', proxima=proxima)
 
+@app.route('/tela_cadastro', methods=['POST', 'GET'])
+def tela_cadastro():
+    return render_template('tela_cadastro.html')
+
+@app.route('/cadastrar_user', methods=['POST', ])
+def cadastrar_user():
+    email = request.form['email']
+    senha = request.form['senha']
+    usuario_dao.inserir_usuario(email, senha)
+    return render_template('login.html')
+
+
+
 
 @app.route('/autenticar', methods=['POST', ])
 def autenticar():
     usuario = usuario_dao.buscar_por_id(request.form['usuario'])
+    print(usuario)
     if usuario:
         if usuario.senha == request.form['senha']:
-            session['usuario_logado'] = usuario.id
-            flash(usuario.nome + ' logou com sucesso!')
+            session['usuario_logado'] = usuario.email
+            flash(usuario.email + ' logou com sucesso!')
             proxima_pagina = request.form['proxima']
             return redirect(proxima_pagina)
     else:

@@ -20,6 +20,13 @@
         {% endwith %}
 
         <div class="page-header">
+
+          {% if session['usuario_logado'] %}
+            <h3>Olá {{ session['usuario_logado'] }}! </h3>
+            <a class="btn btn-danger" href="{{ url_for('logout') }}">Logout</a>
+          {% endif %}
+
+
             <h1>{{ titulo }}</h1>
         </div>
         {% block conteudo %}{% endblock %}
